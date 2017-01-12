@@ -23,7 +23,7 @@ set isident+=@
 syn match haskell_comment  /--.*$/ contained contains=alex_todo,alex_fixme
 syn match haskell_char /'[^\\]'\|'\\.'/ contained
 
-syn region haskell_string           start=/"/ skip=/\\"/ end=/"/        contained
+syn region haskell_string           start=/"/ skip=/\\\\\|\\"/ end=/"/        contained
 syn region haskell_block_comment    start=/{-/ end=/-}/                 fold contained contains=haskell_block_comment,alex_todo,alex_fixme
 syn region haskell_directive        start=/{-#/ end=/#-}/               contained
 syn region haskell_code             start=/{/ skip=/'\\\?}'/ end=/}/    fold contains=haskell_comment,haskell_block_comment,haskell_string,haskell_char,haskell_code,haskell_directive
@@ -34,7 +34,7 @@ syn match alex_todo     /[tT][oO][dD][oO]/ contained
 syn match alex_fixme    /[fF][iI][xX][mM][eE]/ contained
 
 " String representing ordered set of characters for regexp matching
-syn region alex_string  start=/"/ skip=/\\"/ end=/"/
+syn region alex_string  start=/"/ skip=/\\\\\|\\"/ end=/"/
 
 " Sets of characters
 syn match alex_char     /\(\\x[\da-fA-F]\+\|\\o[0-7]\+\|\\\?\d\+\|\\.\|[a-zA-Z_]\)/
@@ -46,7 +46,7 @@ syn match alex_setcompl /\~\./
 syn match alex_setcompl /\~\(\\x[\da-fA-F]\+\|\\o[0-7]\+\|\\\?\d\+\|\\.\|[a-zA-Z_]\)\(-\(\\x[\da-fA-F]\+\|\\o[0-7]\+\|\\\?\d\+\|\\.\|[a-zA-Z_]\)\)\?/he=s+1,me=s+1
 syn match alex_setcompl /\~$[a-zA-Z_][a-zA-Z_\d]*/he=s+1,me=s+1
 syn match alex_setspec  /[\^.$]/ contained
-syn region alex_sets start="\[" skip="\\]" end="]" contains=alex_char,alex_anychar,alex_range,alex_set,alex_setcompl,alex_sets,alex_setspec
+syn region alex_sets start="\[" skip="\\\\\|\\]" end="]" contains=alex_char,alex_anychar,alex_range,alex_set,alex_setcompl,alex_sets,alex_setspec
 
 " Regular expressions
 syn match alex_regexp   /@[a-zA-Z_][a-zA-Z_\d]*/
